@@ -31,6 +31,19 @@ module.exports = {
         400: '#878D99',
         500: '#2F3033',
       },
+    },
+    extend: {
+      fontFamily: {
+        cabinetVariable: ['CabinetGrotesk-Variable'],
+        cabinetRegular: ['CabinetGrotesk-Regular'],
+        cabinetMedium: ['CabinetGrotesk-Medium'],
+        cabinetLight: ['CabinetGrotesk-Light'],
+        cabinetExtraLight: ['CabinetGrotesk-ExtraLight'],
+        cabinetBold: ['CabinetGrotesk-Bold'],
+        cabinetExtraBold: ['CabinetGrotesk-ExtraBold'],
+        cabinetThin: ['CabinetGrotesk-Thin'],
+        cabinetBlack: ['CabinetGrotesk-Black'],
+      }
     }
   },
   plugins: [],
