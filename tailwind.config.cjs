@@ -43,6 +43,7 @@ module.exports = {
         cabinetExtraBold: ['CabinetGrotesk-ExtraBold'],
         cabinetThin: ['CabinetGrotesk-Thin'],
         cabinetBlack: ['CabinetGrotesk-Black'],
+        redHatDisplay: ['Red Hat Display']
       }
     }
   },
