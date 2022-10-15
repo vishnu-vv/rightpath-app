@@ -1,5 +1,15 @@
 <script>
-  import { page } from '$app/stores';
+	import { page } from '$app/stores';
+ 
+	const {
+		status,
+		// @ts-ignore
+		error: { message },
+	} = $page;
+	const title = `${status}: ${message}`;
 </script>
-
-<h1>{$page?.status}: {$page?.error?.message}</h1>
+ 
+<svelte:head>
+	<title>{title}</title>
+</svelte:head>
+<h1>{title}</h1>
