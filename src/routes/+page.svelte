@@ -1,3 +1,9 @@
+<script>
+  import { MetaTags } from 'svelte-meta-tags';
+</script>
+
+<MetaTags title="Right Path" description="Follow your passion to get the job you are passionate about. Let us know what job you are passionate about and we will show you the path to get there." />
+
 <div class="flex flex-col h-max mt-28 sm:mt-44 md:mt-36 lg:mt-24 xl:mt-36 text-center md:px-10 lg:px-52 xl:px-80">
   <h1 class="text-3xl md:text-5xl font-extrabold">
     Follow your
