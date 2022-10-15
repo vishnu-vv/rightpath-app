@@ -7,12 +7,33 @@
     title: "Right Path for you",
     description: "Follow your passion to get the job you are passionate about. Let us know what job you are passionate about and we will show you the path to get there.",
     image: "images/twitter-cover-image.jpg",
-    imageAlt: "Right Page Landing Page"
+    imageAlt: "Right Path Landing Page"
+  }
+  
+  export let openGraph = {
+    type: 'website',
+    url: 'https://rightpath.help/',
+    title: "Right Path for you",
+    description: "Follow your passion to get the job you are passionate about. Let us know what job you are passionate about and we will show you the path to get there.",
+    images: [
+      {
+        url: 'images/twitter-cover-image.jpg',
+        width: 1500,
+        height: 500,
+        alt: 'Right Path Landing Page'
+      },
+      {
+        url: 'images/logo.png',
+        width: 200,
+        height: 45,
+        alt: 'Right Path Logo'
+      },
+    ]
   }
 </script>
 
 <MetaTags title="Right Path" description="Follow your passion to get the job you are passionate about. Let us know what job you are passionate about and we will show you the path to get there."
-  {twitter}
+  {twitter} {openGraph}
 />
 
 <div class="flex flex-col h-max mt-28 sm:mt-44 md:mt-36 lg:mt-24 xl:mt-36 text-center md:px-10 lg:px-52 xl:px-80">
