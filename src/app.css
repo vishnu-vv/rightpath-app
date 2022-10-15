@@ -11,27 +11,31 @@
   color: white;
 }
 
-.passion-banner::after {
+.passion-banner::before {
   content: url(/images/passion-arrow-1.png);
-  width: 15px;
-  height: 15px;
   display: inline-block;
   position: relative;
-  bottom: 50px;
-  right: 50px;
 }
 
-.passion-banner::before {
+.passion-banner::after {
   content: url(/images/passion-arrow-2.png);
-  width: 15px;
-  height: 15px;
   display: inline-block;
   position: relative;
-  bottom: 50px;
 }
 
 body {
   background-image: url('/images/banner-image.png');
   background-repeat: no-repeat;
   background-size: cover;
+  font-family: 'Red Hat Display';
+}
+
+@media screen and (min-width: 1024px) {
+  body {
+    background-image: url('/images/banner-image-lg.png');
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'CabinetGrotesk-Variable';
 }
