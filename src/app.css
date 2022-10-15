@@ -3,12 +3,41 @@
 @tailwind utilities;
 
 .btn {
-  @apply rounded-sm py-1 px-2 cursor-pointer tracking-wider;
+  @apply rounded-sm py-1 px-2 cursor-pointer tracking-wider text-white;
 }
 
 .btn-primary {
   @apply bg-primary-500;
-  color: white;
+}
+
+.btn-primary:hover {
+  @apply bg-primary-600;
+}
+
+a {
+  outline: none;
+  padding: 2px 1px 0;
+  text-decoration: none;
+}
+
+a:link {
+  @apply text-primary-500;
+}
+
+a:visited {
+  @apply text-primary-700;
+}
+
+a:focus {
+  text-decoration: underline;
+}
+
+a:hover {
+  @apply text-primary-600;
+}
+
+a:active {
+  text-decoration: underline;
 }
 
 body {
