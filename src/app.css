@@ -11,18 +11,6 @@
   color: white;
 }
 
-.passion-banner::before {
-  content: url(/images/passion-arrow-1.png);
-  display: inline-block;
-  position: relative;
-}
-
-.passion-banner::after {
-  content: url(/images/passion-arrow-2.png);
-  display: inline-block;
-  position: relative;
-}
-
 body {
   background-image: url('/images/banner-image.png');
   background-repeat: no-repeat;
