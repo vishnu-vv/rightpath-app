@@ -18,6 +18,7 @@
     images: [
       {
         url: 'images/twitter-cover-image.jpg',
+        secureurl: 'images/twitter-cover-image.jpg',
         width: 1500,
         height: 500,
         alt: 'Right Path Landing Page'
