@@ -12,7 +12,7 @@
 
 <Header />
 
-<main class="py-6 px-4 sm:p-6 md:py-10 md:px-8">
+<main class="landing-page h-screen w-full flex flex-col">
   <slot />
 </main>
 

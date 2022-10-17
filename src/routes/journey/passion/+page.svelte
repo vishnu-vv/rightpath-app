@@ -51,3 +51,16 @@
     <p style="color: red">{error}</p>
   {/await}
 </main>
+
+
+<style>
+  :global(body) {
+    background-image: url('/images/background.png');
+  }
+
+  @media screen and (min-width: 1024px) {
+    :global(body) {
+      background-image: url('/images/background-lg.png');
+    }
+  }
+</style>
