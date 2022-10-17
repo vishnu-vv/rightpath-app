@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { passions, passionNames, currentPassion } from "$lib/shared/stores/passion";
   import { onMount } from "svelte";
 
@@ -26,7 +26,7 @@
 		}
 	}
 
-  let promise;
+  let promise: any;
 
 	function handleClick() {
 		promise = fetchPassion();

@@ -1,53 +1,21 @@
-<script>
-  import { MetaTags } from 'svelte-meta-tags';
-  export let twitter = {
-    handle: "@Right_Path_4U",
-    site: "https://rightpath.help/",
-    cardType: "summary_large_image",
-    title: "Right Path for you",
-    description: "Follow your passion to get the job you are passionate about. Let us know what job you are passionate about and we will show you the path to get there.",
-    image: "images/twitter-cover-image.jpg",
-    imageAlt: "Right Path Landing Page"
-  }
-  
-  export let openGraph = {
-    type: 'website',
-    url: 'https://rightpath.help/',
-    title: "Right Path for you",
-    description: "Follow your passion to get the job you are passionate about. Let us know what job you are passionate about and we will show you the path to get there.",
-    images: [
-      {
-        url: 'images/twitter-cover-image.jpg',
-        secureurl: 'images/twitter-cover-image.jpg',
-        width: 1500,
-        height: 500,
-        alt: 'Right Path Landing Page'
-      },
-      {
-        url: 'images/logo.png',
-        width: 200,
-        height: 45,
-        alt: 'Right Path Logo'
-      },
-    ]
-  }
+<script lang="ts">
+  import passionArrowA from "$lib/images/passion-arrow-1.png";
+  import passionArrowALg from "$lib/images/passion-arrow-1-lg.png";
+  import passionArrowB from "$lib/images/passion-arrow-2.png";
+  import passionArrowBLg from "$lib/images/passion-arrow-2-lg.png";
 </script>
-
-<MetaTags title="Right Path" description="Follow your passion to get the job you are passionate about. Let us know what job you are passionate about and we will show you the path to get there."
-  {twitter} {openGraph}
-/>
 
 <div class="flex flex-col h-max mt-28 sm:mt-44 md:mt-36 lg:mt-24 xl:mt-36 text-center md:px-10 lg:px-52 xl:px-80">
   <h1 class="text-3xl md:text-5xl font-extrabold">
     Follow your
     <span class="text-secondary-500 passion-banner relative">
       <img class="absolute right-20 bottom-10 h-8 md:bottom-16 md:right-28 md:h-10 lg:h-12"
-        srcset="images/passion-arrow-1.png 375w, images/passion-arrow-1-lg.png 1024w"
-        sizes="(max-width: 1023px) 375px, 1024px" src="images/passion-arrow-1.png" alt="Passion Highlight Arrow 1" />
+        srcset="{passionArrowA} 375w, {passionArrowALg} 1024w"
+        sizes="(max-width: 1023px) 375px, 1024px" src="{passionArrowA}" alt="Passion Highlight Arrow 1" />
       passion
       <img class="absolute right-0 bottom-10 h-10 md:bottom-16 md:h-12 lg:h-14"
-        srcset="images/passion-arrow-2.png 375w, images/passion-arrow-2-lg.png 1024w"
-        sizes="(max-width: 1023px) 375px, 1024px" src="images/passion-arrow-2.png" alt="Passion Highlight Arrow 2" />
+        srcset="{passionArrowB} 375w, {passionArrowBLg} 1024w"
+        sizes="(max-width: 1023px) 375px, 1024px" src="{passionArrowB}" alt="Passion Highlight Arrow 2" />
     </span>
     to get the job you are passionate about
   </h1>
@@ -56,7 +24,7 @@
     help you figure out!
     Let us know what job you are passionate about and we will show you the path to get there.
   </p>
-  <a href="/passion">
+  <a href="/journey/passion">
     <button class="btn btn-primary w-48 h-10 text-sm mx-auto font-semibold">Start Your Journey!</button>
   </a>
 </div>
