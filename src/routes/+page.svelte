@@ -56,7 +56,9 @@
     help you figure out!
     Let us know what job you are passionate about and we will show you the path to get there.
   </p>
-  <button class="btn btn-primary w-48 h-10 text-sm mx-auto font-semibold">Start Your Journey!</button>
+  <a href="/passion">
+    <button class="btn btn-primary w-48 h-10 text-sm mx-auto font-semibold">Start Your Journey!</button>
+  </a>
 </div>
 <div class="flex flex-col justify-around h-48 lg:w-1/2 mx-auto text-center bg-white rounded-md mt-56 p-4">
   <p class="font-bold text-xl leading-6 mt-2">Dont know what your passion is?</p>
