@@ -1,8 +1,5 @@
 import type { OpenGraph, Twitter } from 'svelte-meta-tags';
 
-export const prerender = true;
-export const ssr = false
-
 export let twitter: Twitter = {
   handle: "@Right_Path_4U",
   site: "https://rightpath.help/",
