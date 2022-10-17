@@ -9,3 +9,5 @@ export const passions = writable<Passion[]>([]);
 export const passionNames = derived(passions, ($passions) => {
   return $passions.map(passion => passion.title);
 });
+
+export const currentPassion = writable<Passion>();
