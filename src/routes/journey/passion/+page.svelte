@@ -1,10 +1,13 @@
 <script lang="ts">
   import { passions, passionNames, currentPassion } from "$lib/shared/stores/passion";
   import { onMount } from "svelte";
+  import dayjs from 'dayjs';
+	import { Datepicker } from 'svelte-calendar';
+
+	let store: any;
   import personImage from "$lib/images/person1.png";
 
   onMount(async () => {
-
     fetch('https://rightpath-api.herokuapp.com/passions')
       .then(res => res.json())
       .then(data => {
@@ -15,23 +18,6 @@
         return [];
       });
   });
-
-  async function fetchPassion() {
-		const res = await fetch('https://rightpath-api.herokuapp.com/passions/1');
-		const data = await res.json();
-
-		if (res.ok) {
-			return data;
-		} else {
-			throw new Error(data);
-		}
-	}
-
-  let promise: any;
-
-	function handleClick() {
-		promise = fetchPassion();
-	}
 </script>
 
 <main class="grid place-content-center mt-20">
@@ -40,7 +26,9 @@
   <h2 class="font-extrabold text-3xl my-2 text-center">My name is</h2>
   <input class="bg-transparent text-center text-3xl border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none" type="text" placeholder="Full Name">
   <h2 class="font-extrabold text-3xl my-2 text-center">and I'm born on</h2>
-  <input class="bg-transparent text-center text-3xl border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none" type="text" placeholder="Date of Birth">
+  <Datepicker bind:store let:key let:send let:receive>
+    <input in:receive|local={{ key }} out:send|local={{ key }} class="bg-transparent text-center text-3xl border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none" type="text" placeholder="{$store?.hasChosen ? dayjs($store.selected).format('DD/MM/YYYY') : 'Date of Birth'}">
+  </Datepicker>
   <h2 class="font-extrabold text-3xl my-2 text-center">and my passions are</h2>
   <input class="bg-transparent text-center text-3xl border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none" type="text" placeholder="eg: Football, Cricket">
 
@@ -51,33 +39,3 @@
     </span>
   </button>
 </main>
-
-<style>
-  :global(body) {
-    background-image: url('/images/background.png');
-  }
-
-  @media screen and (min-width: 1024px) {
-    :global(body) {
-      background-image: url('/images/background-lg.png');
-    }
-  }
-</style>
-
-<!-- 
-<h1>Passion List</h1>
-  <ul>
-    {#each $passionNames as passionName}
-    <li>
-      <button on:click={handleClick}>{passionName}</button>
-    </li>
-    {/each}
-  </ul>  
-  
-  {#await promise}
-	  <p>...waiting</p>
-  {:then p}
-    <p>My current passion is {p}</p>
-  {:catch error}
-    <p style="color: red">{error}</p>
-  {/await} -->

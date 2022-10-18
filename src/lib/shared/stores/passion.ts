@@ -11,3 +11,9 @@ export const passionNames = derived(passions, ($passions) => {
 });
 
 export const currentPassion = writable<Passion>();
+
+export const dateOfBirth = writable<Date>();
+
+export const dob = derived(dateOfBirth, ($dateOfBirth) => {
+  return $dateOfBirth;
+});
