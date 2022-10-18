@@ -1,11 +1,8 @@
 <script lang="ts">
-  import { passions, passionNames, currentPassion } from "$lib/shared/stores/passion";
   import { onMount } from "svelte";
-  import dayjs from 'dayjs';
-	import { Datepicker } from 'svelte-calendar';
-
-	let store: any;
+  import { passions, passionNames, currentPassion } from "$lib/shared/stores/passion";
   import personImage from "$lib/images/person1.png";
+	import Calendar from "$lib/components/Calendar.svelte";
 
   onMount(async () => {
     fetch('https://rightpath-api.herokuapp.com/passions')
@@ -24,13 +21,11 @@
   <img class="my-4 mx-auto" src={personImage} width="50" height="50" alt="Person">
   <p class="font-neutral-400 font-semibold mb-2 text-center">Fill the details and start your journey</p>
   <h2 class="font-extrabold text-3xl my-2 text-center">My name is</h2>
-  <input class="bg-transparent text-center text-3xl border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none" type="text" placeholder="Full Name">
+  <input class="bg-transparent text-center text-3xl text-secondary-500 font-extrabold border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none" type="text" placeholder="Full Name">
   <h2 class="font-extrabold text-3xl my-2 text-center">and I'm born on</h2>
-  <Datepicker bind:store let:key let:send let:receive>
-    <input in:receive|local={{ key }} out:send|local={{ key }} class="bg-transparent text-center text-3xl border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none" type="text" placeholder="{$store?.hasChosen ? dayjs($store.selected).format('DD/MM/YYYY') : 'Date of Birth'}">
-  </Datepicker>
-  <h2 class="font-extrabold text-3xl my-2 text-center">and my passions are</h2>
-  <input class="bg-transparent text-center text-3xl border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none" type="text" placeholder="eg: Football, Cricket">
+  <Calendar />
+  <h2 class="font-extrabold text-3xl my-2 text-center">and my passion is</h2>
+  <input class="bg-transparent text-center text-secondary-500 font-extrabold text-3xl border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none" type="text" placeholder="eg: Football, Cricket">
 
   <button class="btn btn-primary w-48 h-10 text-sm mx-auto font-semibold mt-8 grid place-content-center">
     <span class="align-middle flex">
