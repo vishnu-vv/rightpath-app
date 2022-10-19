@@ -1,18 +1,11 @@
-import { browser } from '$app/environment';
-import { writable, derived } from 'svelte/store';
+import { derived } from 'svelte/store';
+import { localStorageStore } from "@babichjacob/svelte-localstorage/svelte-kit";
+let name: string = '';
+export const currentUser = localStorageStore("user", name);
 
-export interface User {
-  name: string;
-  dob?: Date;
-}
+let dob: any = new Date();
+export const dateOfBirth = localStorageStore("dateOfBirth", dob);
 
-const defaultValue: User = {
-  name: ''
-};
-
-let initialValue = (browser && localStorage.getItem("user"));
-export const currentUser = writable(browser && initialValue ? JSON.parse(initialValue) : defaultValue)
-
-currentUser.subscribe((value) => {
-  browser && localStorage.setItem('currentUser', JSON.stringify(value));
+export const currentDateOfBirth = derived(dateOfBirth, ($dateOfBirth) => {
+  return new Date($dateOfBirth);
 });

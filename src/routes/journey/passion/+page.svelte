@@ -1,40 +1,22 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { passions, selectedPassionNames, selectedPassions, type Passion } from "$lib/shared/stores/passion";
-  import { currentUser, type User } from "$lib/shared/stores/user";
+  import Svelecte from 'svelecte';
+  import { selectedPassionNames, selectedPassions } from "$lib/shared/stores/passion";
+  import { currentUser } from "$lib/shared/stores/user";
   import personImage from "$lib/images/person1.png";
 	import Calendar from "$lib/components/Calendar.svelte";
-  import Svelecte from 'svelecte';
-
   let minQueryValue = 1;
-  let resetOnBlur = true;
-  let fetchResetOnBlur = true;
-
-  let value: Passion[] = [];
-
-  let datePickerStore: any;
-
-  onMount(async () => {
-    fetch('https://rightpath-api.herokuapp.com/passions')
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        passions.set(data);
-      }).catch(error => {
-        console.log(error);
-        return [];
-      });
-  });
+  let resetOnBlur = false;
+  let fetchResetOnBlur = false;
 </script>
 
 <main class="grid place-content-center mt-20">
   <img class="my-4 mx-auto" src={personImage} width="50" height="50" alt="Person">
   <p class="font-neutral-400 font-semibold mb-2 text-center">Fill the details and start your journey</p>
   <h2 class="font-extrabold text-3xl my-2 text-center">My name is</h2>
-  <input bind:value={$currentUser.name} class="bg-transparent text-center text-3xl text-secondary-500 font-extrabold border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none" type="text" placeholder="Full Name">
+  <input bind:value={$currentUser} class="bg-transparent text-center text-3xl text-secondary-500 font-extrabold border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none" type="text" placeholder="Full Name">
   <h2 class="font-extrabold text-3xl my-2 text-center">and I'm born on</h2>
-  <Calendar {datePickerStore}/>
-  <h2 class="font-extrabold text-3xl my-2 text-center">and my passion is</h2>
+  <Calendar />
+  <h2 class="font-extrabold text-3xl my-2 text-center">and my passions are</h2>
   <input value={$selectedPassionNames} class="bg-transparent text-center text-secondary-500 font-extrabold text-3xl border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none" type="text" placeholder="eg: Football, Cricket">
 
   <Svelecte
@@ -42,24 +24,21 @@
     {fetchResetOnBlur}
     bind:value={$selectedPassions}
     valueAsObject
-    valueField="id"
-    labelField="title"
     minQuery={minQueryValue}
-    bind:readSelection={value}
     fetchMode="init"
     multiple
     max={2}
-    on:change={() => {
-      selectedPassions.set(value);
-    }}
+    on:invalidValue={() => {}}
     placeholder="Select your passions"
     fetch="https://rightpath-api.herokuapp.com/passions"
   ></Svelecte>
 
-  <button class="btn btn-primary w-48 h-10 text-sm mx-auto font-semibold mt-8 grid place-content-center">
-    <span class="align-middle flex">
-      Start My Journey!
-      <svg aria-hidden="true" class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-    </span>
-  </button>
+  <a href="/journey/course">
+    <button class="btn btn-primary w-48 h-10 text-sm mx-auto font-semibold mt-8 grid place-content-center">
+      <span class="align-middle flex">
+        Start My Journey!
+        <svg aria-hidden="true" class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+      </span>
+    </button>
+  </a>
 </main>

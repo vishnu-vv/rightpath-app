@@ -1,9 +1,10 @@
 <script lang="ts">
   import dayjs from 'dayjs';
   import { Datepicker } from 'svelte-calendar';
+	import { currentDateOfBirth, dateOfBirth } from '$lib/shared/stores/user';
 
-  export let datePickerStore: any;
-
+  let store: any;
+  
   let theme = {
     "calendar": {
       "width": "700px",
@@ -34,10 +35,12 @@
       }
     }
   };
+
+  $: $store?.hasChosen && dateOfBirth.set($store?.selected)
 </script>
 
-<Datepicker {theme} bind:store={datePickerStore} let:key let:send let:receive>
-  <input in:receive|local={{ key }} out:send|local={{ key }} value={dayjs($datePickerStore?.selected).format('DD/MM/YYYY')}
+<Datepicker {theme} bind:store format="DD/MM/YYYY" selected={$currentDateOfBirth} let:key let:send let:receive>
+  <input in:receive|local={{ key }} out:send|local={{ key }} value={dayjs($store?.selected).format('DD/MM/YYYY')}
     class="bg-transparent text-center font-extrabold text-secondary-500 text-3xl border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none"
-    type="text" placeholder="{$datePickerStore?.hasChosen ? dayjs($datePickerStore.selected).format('DD/MM/YYYY') : 'Date of Birth'}">
+    type="text" placeholder="{$store?.hasChosen ? dayjs($store.selected).format('DD/MM/YYYY') : 'Date of Birth'}">
 </Datepicker>
