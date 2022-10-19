@@ -1,18 +1,19 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+  import { onMount } from 'svelte';
   import courseImage from "$lib/images/course.png"
+  import SkeletonCardLoader from "$lib/components/SkeletonCardLoader.svelte";
 
-	let courses: any = [];
+  let courses: any = [];
 
-	onMount(async () => {
-		const res = await fetch(`https://rightpath-api.herokuapp.com/courses`);
-		courses = await res.json();
+  onMount(async () => {
+    const res = await fetch(`https://rightpath-api.herokuapp.com/courses`);
+    courses = await res.json();
     console.log(courses);
-	});
+  });
 </script>
 
 <div class="courses">
-	{#each courses as course}
+  {#each courses as course}
     <div class="max-w-sm bg-white rounded-lg shadow-md mt-4 pt-4">
       <img class="rounded-t-lg w-11/12 mx-auto" src={courseImage} alt={course.title} />
       <div class="p-5 pt-0">
@@ -27,8 +28,7 @@
         </button>
       </div>
     </div>
-	{:else}
-		<p>loading...</p>
-	{/each}
+  {:else}
+    <SkeletonCardLoader count={3} />
+  {/each}
 </div>
-
