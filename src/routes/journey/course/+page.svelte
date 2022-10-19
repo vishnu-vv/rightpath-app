@@ -3,7 +3,17 @@
   import { age, currentUser } from "$lib/shared/stores/user";
   import { selectedPassionNames } from "$lib/shared/stores/passion";
   import courseImage from "$lib/images/course.png"
+	import Overlay from "$lib/components/Overlay.svelte";
+	import { isOverlayOpen } from "$lib/shared/stores/overlay";
 </script>
+
+{#if $isOverlayOpen}
+  <Overlay>
+    <h1 class="font-extrabold text-4xl">
+      Course list overlay
+    </h1>
+  </Overlay>
+{/if}
 
 <div class="grid place-content-center mt-20 text-center px-4">
   <div class="personal-details grid place-content-center font-semibold">
@@ -30,13 +40,11 @@
     <div class="p-5 py-0">
       <h3 class="font-extrabold text-2xl">Select Course</h3>
       <p class="mb-2 font-normal text-nuetral-400">Select a course from the currated list of courses that we made based on your passion.</p>
-      <a href="/journey/course">
-        <button class="btn btn-primary w-48 h-10 text-sm mx-auto font-semibold mt-2 grid place-content-center">
-          <span class="align-middle flex">
-            Select Course
-          </span>
-        </button>
-      </a>
+      <button on:click={() => isOverlayOpen.set(true)} class="btn btn-primary w-48 h-10 text-sm mx-auto font-semibold mt-2 grid place-content-center">
+        <span class="align-middle flex">
+          Select Course
+        </span>
+      </button>
     </div>
   </div>
 </div>
