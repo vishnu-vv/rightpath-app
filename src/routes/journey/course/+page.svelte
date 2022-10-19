@@ -37,7 +37,7 @@
     <a href="/journey/course">
       <img class="rounded-t-lg w-11/12 mx-auto" src={courseImage} alt="Select Course" />
     </a>
-    <div class="p-5 py-0">
+    <div class="p-5 pt-0">
       <h3 class="font-extrabold text-2xl">Select Course</h3>
       <p class="mb-2 font-normal text-nuetral-400">Select a course from the currated list of courses that we made based on your passion.</p>
       <button on:click={() => isOverlayOpen.set(true)} class="btn btn-primary w-48 h-10 text-sm mx-auto font-semibold mt-2 grid place-content-center">
