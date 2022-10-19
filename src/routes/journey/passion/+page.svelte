@@ -1,8 +1,18 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { passions, passionNames, currentPassion } from "$lib/shared/stores/passion";
+  import { passions, selectedPassionNames, selectedPassions, type Passion } from "$lib/shared/stores/passion";
+  import { currentUser, type User } from "$lib/shared/stores/user";
   import personImage from "$lib/images/person1.png";
 	import Calendar from "$lib/components/Calendar.svelte";
+  import Svelecte from 'svelecte';
+
+  let minQueryValue = 1;
+  let resetOnBlur = true;
+  let fetchResetOnBlur = true;
+
+  let value: Passion[] = [];
+
+  let datePickerStore: any;
 
   onMount(async () => {
     fetch('https://rightpath-api.herokuapp.com/passions')
@@ -21,11 +31,30 @@
   <img class="my-4 mx-auto" src={personImage} width="50" height="50" alt="Person">
   <p class="font-neutral-400 font-semibold mb-2 text-center">Fill the details and start your journey</p>
   <h2 class="font-extrabold text-3xl my-2 text-center">My name is</h2>
-  <input class="bg-transparent text-center text-3xl text-secondary-500 font-extrabold border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none" type="text" placeholder="Full Name">
+  <input bind:value={$currentUser.name} class="bg-transparent text-center text-3xl text-secondary-500 font-extrabold border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none" type="text" placeholder="Full Name">
   <h2 class="font-extrabold text-3xl my-2 text-center">and I'm born on</h2>
-  <Calendar />
+  <Calendar {datePickerStore}/>
   <h2 class="font-extrabold text-3xl my-2 text-center">and my passion is</h2>
-  <input class="bg-transparent text-center text-secondary-500 font-extrabold text-3xl border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none" type="text" placeholder="eg: Football, Cricket">
+  <input value={$selectedPassionNames} class="bg-transparent text-center text-secondary-500 font-extrabold text-3xl border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none" type="text" placeholder="eg: Football, Cricket">
+
+  <Svelecte
+    {resetOnBlur}
+    {fetchResetOnBlur}
+    bind:value={$selectedPassions}
+    valueAsObject
+    valueField="id"
+    labelField="title"
+    minQuery={minQueryValue}
+    bind:readSelection={value}
+    fetchMode="init"
+    multiple
+    max={2}
+    on:change={() => {
+      selectedPassions.set(value);
+    }}
+    placeholder="Select your passions"
+    fetch="https://rightpath-api.herokuapp.com/passions"
+  ></Svelecte>
 
   <button class="btn btn-primary w-48 h-10 text-sm mx-auto font-semibold mt-8 grid place-content-center">
     <span class="align-middle flex">
