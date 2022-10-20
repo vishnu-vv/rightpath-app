@@ -2,6 +2,7 @@ import { localStorageStore } from "@babichjacob/svelte-localstorage/svelte-kit";
 import { derived } from 'svelte/store';
 
 export interface Passion {
+  id: number;
   title: string;
 }
 

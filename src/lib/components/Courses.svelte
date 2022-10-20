@@ -2,15 +2,21 @@
   import { onMount } from 'svelte';
   import courseImage from "$lib/images/course.png"
   import SkeletonCardLoader from "$lib/components/SkeletonCardLoader.svelte";
+	import { query } from '$lib/shared/stores/course';
+	import CourseFilter from './CourseFilter.svelte';
 
   let courses: any = [];
-
-  onMount(async () => {
-    const res = await fetch(`https://rightpath-api.herokuapp.com/courses`);
+  async function fetchCourses(query: string) {
+    const res = await fetch(`https://rightpath-api.herokuapp.com/courses${query}`);
     courses = await res.json();
-    console.log(courses);
-  });
+  }
+
+  onMount(async () => fetchCourses($query));
+
+  $: fetchCourses($query)
 </script>
+
+<CourseFilter />
 
 <div class="courses">
   {#each courses as course}
