@@ -1,5 +1,5 @@
-<script>
-  import { isOverlayOpen } from "$lib/shared/stores/overlay";
+<script lang="ts">
+  export let isOverlayOpen: any;
   import { fly } from "svelte/transition";
 </script>
 
