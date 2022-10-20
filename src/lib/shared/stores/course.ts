@@ -1,4 +1,4 @@
-import { writable, derived } from 'svelte/store';
+import { derived } from 'svelte/store';
 import { localStorageStore } from "@babichjacob/svelte-localstorage/svelte-kit";
 
 export const showFilter = localStorageStore("showFilter", false);
@@ -12,6 +12,8 @@ export const filteredCourses = derived(
     else return $courses;
   }
 );
+
+export const selectedCourse = localStorageStore("selectedCourse", null);
 
 export class CourseAPIFilter {
   passionIds: string[];
