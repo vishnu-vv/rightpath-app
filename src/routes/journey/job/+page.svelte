@@ -2,16 +2,15 @@
 	import Profile from "$lib/components/Profile.svelte";
   import personImage from "$lib/images/person1.png";
   import jobImage from "$lib/images/job.png";
-
   import { selectedJob } from "$lib/shared/stores/job";
   import { isJobOverlayOpen } from "$lib/shared/stores/overlay";
 	import Overlay from "$lib/components/Overlay.svelte";
+	import Jobs from "$lib/components/Jobs.svelte";
 </script>
 
 {#if $isJobOverlayOpen}
   <Overlay isOverlayOpen={isJobOverlayOpen}>
-    <!-- <Courses /> -->
-    <h1>Job search</h1>
+    <Jobs />
   </Overlay>
 {/if}
 
@@ -41,5 +40,14 @@
         </button>
       </div>
     {/if}
+  </div>
+
+  <div class="flex justify-center my-4">
+    <a href="/journey/course">
+      <div class="w-3 h-3 rounded-full bg-white border border-nuetral-200 mx-1"></div>
+    </a>
+    <a href="/journey/job">
+      <div class="w-3 h-3 rounded-full bg-white border-2 border-secondary-500 mx-1"></div>
+    </a>
   </div>
 </div>

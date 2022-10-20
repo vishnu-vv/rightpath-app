@@ -41,4 +41,13 @@
       </div>
     {/if}
   </div>
+
+  <div class="flex justify-center my-4">
+    <a href="/journey/course">
+      <div class="w-3 h-3 rounded-full bg-white border-2 border-secondary-500 mx-1"></div>
+    </a>
+    <a href="/journey/job">
+      <div class="w-3 h-3 rounded-full bg-white border border-nuetral-200 mx-1"></div>
+    </a>
+  </div>
 </div>
