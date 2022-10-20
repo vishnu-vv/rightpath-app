@@ -6,12 +6,24 @@
   @apply rounded-sm py-1 px-2 cursor-pointer tracking-wider text-white;
 }
 
+.btn.disabled {
+  @apply opacity-40;
+}
+
 .btn-primary {
   @apply bg-primary-500;
 }
 
 .btn-primary:hover {
   @apply bg-primary-600;
+}
+
+.btn-secondary {
+  @apply border border-primary-500 text-primary-500 bg-white;
+}
+
+.btn-secondary:hover {
+  @apply border-primary-600 text-primary-600
 }
 
 a {
