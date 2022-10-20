@@ -3,6 +3,7 @@ import { localStorageStore } from "@babichjacob/svelte-localstorage/svelte-kit";
 
 export const showFilter = localStorageStore("showFilter", false);
 export const searchCourse = localStorageStore("searchCourse", '');
+
 export const courses = localStorageStore("courses", []);
 export const filteredCourses = derived(
   [searchCourse, courses],
@@ -36,24 +37,16 @@ export const query = derived(
     const filter = JSON.parse($courseAPIFilter);
     let query = '?';
     if (filter.passionIds.length) {
-      filter.passionIds.forEach((id: number) => {
-        query += `passionId=${id}&`
-      });
+      query += `passionIds=${filter.passionIds.toString()}&`;
     }
     if (filter.durations.length) {
-      filter.durations.forEach((duration: string) => {
-        query += `duration=${duration}&`
-      });
+      query += `durations=${filter.durations.toString()}&`;
     }
     if (filter.locations.length) {
-      filter.locations.forEach((location: string) => {
-        query += `location=${location}&`
-      });
+      query += `locations=${filter.locations.toString()}&`;
     }
     if (filter.universityIds.length) {
-      filter.universityIds.forEach((universityId: string) => {
-        query += `universityId=${universityId}&`
-      });
+      query += `universityIds=${filter.universityIds.toString()}&`
     }
 
     return query === '?' ? '' : query.slice(0, -1);
