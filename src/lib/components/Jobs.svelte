@@ -34,10 +34,10 @@
         <div class="p-5 pt-2">
           <h3 class="font-extrabold text-2xl">{job.title}</h3>
           <p class="mb-2 font-normal text-nuetral-400">
-            {job.overview}
+            {job.description}
           </p>
           <a href="/journey/job">
-            <button on:click={() => { selectedJob.set(job); isJobOverlayOpen.set(false); }} class="btn btn-primary w-full h-10 text-sm mx-auto font-semibold mt-2 grid place-content-center">
+            <button on:click={() => { selectedJob.set(job); isJobOverlayOpen.set(false); showJobFilter.set(false)}} class="btn btn-primary w-full h-10 text-sm mx-auto font-semibold mt-2 grid place-content-center">
               <span class="align-middle flex">
                 Add Job
               </span>

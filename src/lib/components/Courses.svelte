@@ -4,6 +4,7 @@
   import SkeletonCardLoader from "$lib/components/SkeletonCardLoader.svelte";
 	import { courses, selectedCourse, filteredCourses, query, searchCourse, showFilter } from '$lib/shared/stores/course';
 	import CourseFilter from './CourseFilter.svelte';
+	import { isCourseOverlayOpen } from '$lib/shared/stores/overlay';
 
   async function fetchCourses(query: string) {
     const res = await fetch(`https://rightpath-api.herokuapp.com/courses${query}`);
@@ -36,7 +37,7 @@
             {course.overview}
           </p>
           <a href="/journey/job">
-            <button on:click={() => { selectedCourse.set(course) }} class="btn btn-primary w-full h-10 text-sm mx-auto font-semibold mt-2 grid place-content-center">
+            <button on:click={() => { selectedCourse.set(course); isCourseOverlayOpen.set(false); showFilter.set(false) }} class="btn btn-primary w-full h-10 text-sm mx-auto font-semibold mt-2 grid place-content-center">
               <span class="align-middle flex">
                 Add Course
               </span>
