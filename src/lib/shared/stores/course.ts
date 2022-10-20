@@ -1,6 +1,7 @@
 import { writable, derived } from 'svelte/store';
 import { localStorageStore } from "@babichjacob/svelte-localstorage/svelte-kit";
 
+export const showFilter = localStorageStore("showFilter", false);
 export const searchCourse = localStorageStore("searchCourse", '');
 export const courses = localStorageStore("courses", []);
 export const filteredCourses = derived(

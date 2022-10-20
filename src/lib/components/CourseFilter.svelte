@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { CourseAPIFilter, courseAPIFilter, courseAPIFilterObject } from '$lib/shared/stores/course';
+  import { CourseAPIFilter, courseAPIFilter, courseAPIFilterObject, showFilter } from '$lib/shared/stores/course';
   import { selectedPassions } from '$lib/shared/stores/passion';
 
   const locations = ['Kerala', 'Uttar Pradesh', 'Telangana'];
@@ -84,7 +84,7 @@
     <button on:click={resetCourseAPIFilter} class="btn btn-secondary w-1/2 mr-1 h-10 text-sm mx-auto font-semibold mt-8 grid place-content-center">
       Clear
     </button>
-    <button class="btn btn-primary w-1/2 ml-1 h-10 text-sm mx-auto font-semibold mt-8 grid place-content-center">
+    <button on:click={() => showFilter.set(false)} class="btn btn-primary w-1/2 ml-1 h-10 text-sm mx-auto font-semibold mt-8 grid place-content-center">
       Apply
     </button>
   </div>
