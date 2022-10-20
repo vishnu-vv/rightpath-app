@@ -1,19 +1,20 @@
 import { derived } from 'svelte/store';
 import { localStorageStore } from "@babichjacob/svelte-localstorage/svelte-kit";
+import type { Course } from '$lib/models';
 
 export const showFilter = localStorageStore("showFilter", false);
 export const searchCourse = localStorageStore("searchCourse", '');
 
-export const courses = localStorageStore("courses", []);
-export const filteredCourses = derived(
+export const courses = localStorageStore<Course[]>("courses", []);
+export const filteredCourses: any = derived(
   [searchCourse, courses],
   ([$searchCourse, $courses]) => {
-    if ($searchCourse) return $courses.filter(course => course.title.includes($searchCourse))
+    if ($searchCourse) return $courses.filter((course: any) => course.title.includes($searchCourse))
     else return $courses;
   }
 );
 
-export const selectedCourse = localStorageStore("selectedCourse", null);
+export const selectedCourse = localStorageStore<Course | null>("selectedCourse", null);
 
 export class CourseAPIFilter {
   passionIds: string[];

@@ -1,19 +1,20 @@
+import type { Job } from "$lib/models";
 import { localStorageStore } from "@babichjacob/svelte-localstorage/svelte-kit";
 import { derived } from "svelte/store";
 
 export const showJobFilter = localStorageStore("showJobFilter", false);
 export const searchJob = localStorageStore("searchJob", '');
 
-export const jobs = localStorageStore("jobs", []);
-export const filteredJobs = derived(
+export const jobs = localStorageStore<Job[]>("jobs", []);
+export const filteredJobs: any = derived(
   [searchJob, jobs],
   ([$searchJob, $jobs]) => {
-    if ($searchJob) return $jobs.filter(job => job.title.includes($searchJob))
+    if ($searchJob) return $jobs.filter((job: Job) => job.title.includes($searchJob))
     else return $jobs;
   }
 );
 
-export const selectedJob = localStorageStore("selectedJob", null);
+export const selectedJob = localStorageStore<Job | null>("selectedJob", null);
 
 export class JobAPIFilter {
   salaryMin?: number;
