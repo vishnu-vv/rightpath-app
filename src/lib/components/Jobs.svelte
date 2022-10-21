@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import jobImage from "$lib/images/job.png"
-  import searchIcon from "$lib/images/search-icon.png"
   import SkeletonCardLoader from "$lib/components/SkeletonCardLoader.svelte";
 	import { jobs, selectedJob, filteredJobs, query, searchJob, showJobFilter } from '$lib/shared/stores/job';
 	import JobFilter from './JobFilter.svelte';
@@ -31,12 +30,22 @@
       <div class="max-w-sm bg-white rounded-lg shadow-md mt-4 pt-4">
         <img class="rounded-t-lg w-11/12 mx-auto" src={jobImage} alt={job.title} />
         <div class="p-5 pt-2">
-          <h3 class="font-extrabold text-2xl">{job.title}</h3>
+          <h3 class="font-extrabold text-2xl my-2">{job.title}</h3>
           <p class="mb-2 font-normal text-nuetral-400">
-            {job.description}
+            &#8377;{job.salaryMin} - &#8377;{job.salaryMax} 
+            <span class="font-semibold">
+              LPA
+            </span>
           </p>
-          <a href="/journey/job">
-            <button on:click={() => { selectedJob.set(job); isJobOverlayOpen.set(false); showJobFilter.set(false)}} class="btn btn-primary w-full h-10 text-sm mx-auto font-semibold mt-2 grid place-content-center">
+          <div class="mb-2 font-normal flex text-nuetral-400">
+            {#each job.skills as skill}
+              {skill.title}&#8218;&#8201;
+
+            {/each}
+          </div>
+          <a class="p-0" href="/journey/job">
+            <button on:click={() => { selectedJob.set(job); isJobOverlayOpen.set(false); showJobFilter.set(false)}}
+              class="btn btn-secondary w-full h-10 text-sm mx-auto font-semibold mt-2 grid place-content-center">
               <span class="align-middle flex">
                 Add Job
               </span>
