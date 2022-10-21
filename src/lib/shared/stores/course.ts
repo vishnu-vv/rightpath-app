@@ -29,15 +29,14 @@ export class CourseAPIFilter {
   }
 }
 
-export const courseAPIFilter = localStorageStore("courseAPIFilter", JSON.stringify(new CourseAPIFilter()))
-export const courseAPIFilterObject = derived(
-  courseAPIFilter,
-  ($courseAPIFilter) => JSON.parse($courseAPIFilter));
+export const courseAPIFilter = localStorageStore("courseAPIFilter", new CourseAPIFilter())
 
 export const query = derived(
   courseAPIFilter,
   ($courseAPIFilter) => {
-    const filter = JSON.parse($courseAPIFilter);
+    let filter = $courseAPIFilter;
+    console.log(filter);
+    
     let query = '?';
     if (filter.passionIds.length) {
       query += `passionIds=${filter.passionIds.toString()}&`;

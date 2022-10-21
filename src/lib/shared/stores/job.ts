@@ -20,7 +20,7 @@ export const selectedJob = localStorageStore<Job | null>("selectedJob", null);
 export class JobAPIFilter {
   salaryMin: number;
   salaryMax: number;
-  skills: number[];
+  skills: string[];
   constructor() {
     this.salaryMin = 10000;
     this.salaryMax = 10000000;

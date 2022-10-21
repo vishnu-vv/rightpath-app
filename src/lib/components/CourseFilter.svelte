@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { CourseAPIFilter, courseAPIFilter, courseAPIFilterObject, showFilter } from '$lib/shared/stores/course';
+  import { CourseAPIFilter, courseAPIFilter, showFilter } from '$lib/shared/stores/course';
   import { selectedPassions } from '$lib/shared/stores/passion';
 
   const locations = ['Kerala', 'Uttar Pradesh', 'Telangana'];
@@ -16,17 +16,17 @@
   }];
 
   function updateCourseAPIFilter(e: any) {
-    const filter = $courseAPIFilterObject;
+    const filter = $courseAPIFilter;
     let { checked, value, name } = e.target;
     let selected = filter[name];
     selected = selected.filter((item: any) => item != value);
     if (checked) selected.push(value);
     filter[name] = selected;
-    courseAPIFilter.set(JSON.stringify(filter));
+    courseAPIFilter.set(filter);
   }
 
   function resetCourseAPIFilter() {
-    courseAPIFilter.set(JSON.stringify(new CourseAPIFilter()));
+    courseAPIFilter.set(new CourseAPIFilter());
   }
 </script>
 
@@ -34,10 +34,12 @@
   <h2 class="font-bold text-lg mb-8">Filter</h2>
   <h3 class="uppercase text-xs font-nuetral-400 mt-4 mb-1">Passion</h3>
   {#each $selectedPassions as passion}
-  <div class="flex items-start m2-6">
-    <div class="flex items-center h-5">
-      <input id={passion.title} name="passionIds" on:click={updateCourseAPIFilter} type="checkbox" value={passion.id}
-        class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+  <div class="flex items-center my-0.5">
+    <div class="items-center h-8 my-auto flex">
+      <input id={passion.title} name="passionIds"
+        on:click={updateCourseAPIFilter} type="checkbox" value={passion.id}
+        checked={$courseAPIFilter.passionIds.includes(passion.id.toString(10))}
+        class="w-6 h-6 rounded border border-nuetral-300 accent-primary-500 text-primary-500"
         required>
     </div>
     <label for={passion.title} class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{passion.title}</label>
@@ -46,10 +48,12 @@
 
   <h3 class="uppercase text-xs font-nuetral-400 mt-4 mb-1">Location</h3>
   {#each locations as location}
-  <div class="flex items-start m2-6">
-    <div class="flex items-center h-5">
-      <input id={location} name="locations" on:click={updateCourseAPIFilter} type="checkbox" value={location}
-        class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+  <div class="flex items-center my-0.5">
+    <div class="items-center h-8 my-auto flex">
+      <input id={location} name="locations" on:click={updateCourseAPIFilter} 
+        type="checkbox" value={location}
+        checked={$courseAPIFilter.locations.includes(location)}
+        class="w-6 h-6 rounded border border-nuetral-300 accent-primary-500 text-primary-500"
         required>
     </div>
     <label for={location} class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{location}</label>
@@ -58,10 +62,11 @@
 
   <h3 class="uppercase text-xs font-nuetral-400 mt-4 mb-1">Duration</h3>
   {#each durations as duration, i}
-  <div class="flex items-start m2-6">
-    <div class="flex items-center h-5">
-      <input id={duration} name="durations" on:click={updateCourseAPIFilter} type="checkbox" value={i}
-        class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+  <div class="flex items-center my-0.5">
+    <div class="items-center h-8 my-auto flex">
+      <input id={duration} name="durations" on:click={updateCourseAPIFilter} type="checkbox"
+        value={i} checked={$courseAPIFilter.durations.includes(i.toString())}
+        class="w-6 h-6 rounded border border-nuetral-300 accent-primary-500 text-primary-500"
         required>
     </div>
     <label for={duration} class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{duration}</label>
@@ -70,10 +75,11 @@
 
   <h3 class="uppercase text-xs font-nuetral-400 mt-4 mb-1">University</h3>
   {#each universities as uni}
-  <div class="flex items-start m2-6">
-    <div class="flex items-center h-5">
-      <input id={uni.name} name="universityIds" on:click={updateCourseAPIFilter} type="checkbox" value={uni.id}
-        class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+  <div class="flex items-center my-0.5">
+    <div class="items-center h-8 my-auto flex">
+      <input id={uni.name} name="universityIds" on:click={updateCourseAPIFilter} type="checkbox"
+        value={uni.id} checked={$courseAPIFilter.universityIds.includes((uni.id).toString())}
+        class="w-6 h-6 rounded border border-nuetral-300 accent-primary-500 text-primary-500"
         required>
     </div>
     <label for={uni.name} class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{uni.name}</label>

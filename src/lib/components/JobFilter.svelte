@@ -49,10 +49,10 @@
 
   <h3 class="uppercase text-xs font-nuetral-400 mt-4 mb-1 tracking-widest">Skill</h3>
   {#each $skills as skill}
-  <div class="flex items-center m2-6">
+  <div class="flex items-center">
     <div class="flex items-center h-8 my-auto">
       <input id={skill.title} name="skills" on:click={updateJobAPIFilter} 
-        type="checkbox" value={skill.id} checked={$jobAPIFilter.skills.includes(skill.id.toString(10))}
+        type="checkbox" value={skill.id} checked={$jobAPIFilter.skills.includes(skill.id)}
         class="w-6 h-6 rounded border border-nuetral-300 accent-primary-500 text-primary-500"
         required>
     </div>
