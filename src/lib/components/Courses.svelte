@@ -5,6 +5,7 @@
 	import { courses, selectedCourse, filteredCourses, query, searchCourse, showFilter } from '$lib/shared/stores/course';
 	import CourseFilter from './CourseFilter.svelte';
 	import { isCourseOverlayOpen } from '$lib/shared/stores/overlay';
+	import SearchBar from './SearchBar.svelte';
 
   async function fetchCourses(query: string) {
     const res = await fetch(`https://rightpath-api.herokuapp.com/courses${query}`);
@@ -24,10 +25,7 @@
     <p class="font-nuetral-300 mt-2">
       <span class="font-nuetral-500">{$courses.length}</span> courses found
     </p>
-    <div class="flex">
-      <input bind:value={$searchCourse} class="bg-white border border-nuetral-200 rounded-sm px-2 w-3/4" placeholder="Search course title" type="text">
-      <button on:click={() => showFilter.set(true)} class="w-1/4">Filter</button>
-    </div>
+    <SearchBar value={searchCourse}  showJobFilter={showFilter} />
     {#each $filteredCourses as course}
       <div class="max-w-sm bg-white rounded-lg shadow-md mt-4 pt-4">
         <img class="rounded-t-lg w-11/12 mx-auto" src={courseImage} alt={course.title} />
