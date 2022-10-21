@@ -23,7 +23,7 @@
   }
 </script>
 
-<div class="course-filter p-4">
+<div class="course-filter p-4 pb-0">
   <h2 class="font-bold text-lg mb-8">Filter</h2>
   <label for="default-range" class="uppercase text-xs font-nuetral-400 mt-4 mb-1 flex justify-between tracking-widest">
     <span>
@@ -60,13 +60,13 @@
   </div>
   {/each}
 
-  <div class="flex my-8 justify-between">
+  <div class="flex w-full justify-between h-16 sticky bg-white left-0 -bottom-4 items-center text-white text-2xl">
     <button on:click={resetJobAPIFilter}
-      class="btn btn-secondary w-1/2 mr-1 h-10 text-sm mx-auto font-semibold mt-8 grid place-content-center">
+      class="btn btn-secondary w-1/2 mr-1 h-10 text-sm mx-auto font-semibold my-4 grid place-content-center">
       Clear
     </button>
     <button on:click={()=> showJobFilter.set(false)} class="btn btn-primary w-1/2 ml-1 h-10 text-sm mx-auto
-      font-semibold mt-8 grid place-content-center">
+      font-semibold my-4 grid place-content-center">
       Apply
     </button>
   </div>

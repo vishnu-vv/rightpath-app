@@ -30,19 +30,18 @@
   }
 </script>
 
-<div class="course-filter p-4">
+<div class="course-filter p-4 pb-0 flex flex-col">
   <h2 class="font-bold text-lg mb-8">Filter</h2>
   <h3 class="uppercase text-xs font-nuetral-400 mt-4 mb-1">Passion</h3>
   {#each $selectedPassions as passion}
   <div class="flex items-center my-0.5">
     <div class="items-center h-8 my-auto flex">
-      <input id={passion.title} name="passionIds"
-        on:click={updateCourseAPIFilter} type="checkbox" value={passion.id}
+      <input id={passion.title} name="passionIds" on:click={updateCourseAPIFilter} type="checkbox" value={passion.id}
         checked={$courseAPIFilter.passionIds.includes(passion.id.toString(10))}
-        class="w-6 h-6 rounded border border-nuetral-300 accent-primary-500 text-primary-500"
-        required>
+        class="w-6 h-6 rounded border border-nuetral-300 accent-primary-500 text-primary-500" required>
     </div>
-    <label for={passion.title} class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{passion.title}</label>
+    <label for={passion.title}
+      class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{passion.title}</label>
   </div>
   {/each}
 
@@ -50,11 +49,9 @@
   {#each locations as location}
   <div class="flex items-center my-0.5">
     <div class="items-center h-8 my-auto flex">
-      <input id={location} name="locations" on:click={updateCourseAPIFilter} 
-        type="checkbox" value={location}
+      <input id={location} name="locations" on:click={updateCourseAPIFilter} type="checkbox" value={location}
         checked={$courseAPIFilter.locations.includes(location)}
-        class="w-6 h-6 rounded border border-nuetral-300 accent-primary-500 text-primary-500"
-        required>
+        class="w-6 h-6 rounded border border-nuetral-300 accent-primary-500 text-primary-500" required>
     </div>
     <label for={location} class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{location}</label>
   </div>
@@ -64,10 +61,9 @@
   {#each durations as duration, i}
   <div class="flex items-center my-0.5">
     <div class="items-center h-8 my-auto flex">
-      <input id={duration} name="durations" on:click={updateCourseAPIFilter} type="checkbox"
-        value={i} checked={$courseAPIFilter.durations.includes(i.toString())}
-        class="w-6 h-6 rounded border border-nuetral-300 accent-primary-500 text-primary-500"
-        required>
+      <input id={duration} name="durations" on:click={updateCourseAPIFilter} type="checkbox" value={i}
+        checked={$courseAPIFilter.durations.includes(i.toString())}
+        class="w-6 h-6 rounded border border-nuetral-300 accent-primary-500 text-primary-500" required>
     </div>
     <label for={duration} class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{duration}</label>
   </div>
@@ -77,20 +73,21 @@
   {#each universities as uni}
   <div class="flex items-center my-0.5">
     <div class="items-center h-8 my-auto flex">
-      <input id={uni.name} name="universityIds" on:click={updateCourseAPIFilter} type="checkbox"
-        value={uni.id} checked={$courseAPIFilter.universityIds.includes((uni.id).toString())}
-        class="w-6 h-6 rounded border border-nuetral-300 accent-primary-500 text-primary-500"
-        required>
+      <input id={uni.name} name="universityIds" on:click={updateCourseAPIFilter} type="checkbox" value={uni.id}
+        checked={$courseAPIFilter.universityIds.includes((uni.id).toString())}
+        class="w-6 h-6 rounded border border-nuetral-300 accent-primary-500 text-primary-500" required>
     </div>
     <label for={uni.name} class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{uni.name}</label>
   </div>
   {/each}
 
-  <div class="flex my-8 justify-between">
-    <button on:click={resetCourseAPIFilter} class="btn btn-secondary w-1/2 mr-1 h-10 text-sm mx-auto font-semibold mt-8 grid place-content-center">
+  <div class="flex w-full justify-between h-16 sticky bg-white left-0 -bottom-4 items-center text-white text-2xl">
+    <button on:click={resetCourseAPIFilter}
+      class="btn btn-secondary w-1/2 mr-1 h-10 text-sm mx-auto font-semibold my-4 grid place-content-center">
       Clear
     </button>
-    <button on:click={() => showFilter.set(false)} class="btn btn-primary w-1/2 ml-1 h-10 text-sm mx-auto font-semibold mt-8 grid place-content-center">
+    <button on:click={()=> showFilter.set(false)} class="btn btn-primary w-1/2 ml-1 h-10 text-sm mx-auto font-semibold
+      my-4 grid place-content-center">
       Apply
     </button>
   </div>
