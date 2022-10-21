@@ -13,6 +13,7 @@ export interface Course {
 }
 
 export interface Skill {
+  id: number;
   title: string;
   jobId: number;
   job?: Job;

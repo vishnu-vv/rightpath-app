@@ -1,4 +1,4 @@
-import type { Job } from "$lib/models";
+import type { Job, Skill } from "$lib/models";
 import { localStorageStore } from "@babichjacob/svelte-localstorage/svelte-kit";
 import { derived } from "svelte/store";
 
@@ -6,6 +6,7 @@ export const showJobFilter = localStorageStore("showJobFilter", false);
 export const searchJob = localStorageStore("searchJob", '');
 
 export const jobs = localStorageStore<Job[]>("jobs", []);
+export const skills = localStorageStore<Skill[]>("skills", []);
 export const filteredJobs: any = derived(
   [searchJob, jobs],
   ([$searchJob, $jobs]) => {
@@ -17,23 +18,22 @@ export const filteredJobs: any = derived(
 export const selectedJob = localStorageStore<Job | null>("selectedJob", null);
 
 export class JobAPIFilter {
-  salaryMin?: number;
-  salaryMax?: number;
+  salaryMin: number;
+  salaryMax: number;
   skills: number[];
   constructor() {
+    this.salaryMin = 10000;
+    this.salaryMax = 10000000;
     this.skills = [];
   }
 }
 
-export const jobAPIFilter = localStorageStore("jobAPIFilter", JSON.stringify(new JobAPIFilter()))
-export const jobAPIFilterObject = derived(
-  jobAPIFilter,
-  ($jobAPIFilter) => JSON.parse($jobAPIFilter));
+export const jobAPIFilter = localStorageStore("jobAPIFilter", new JobAPIFilter());
 
 export const query = derived(
   jobAPIFilter,
   ($jobAPIFilter) => {
-    const filter = JSON.parse($jobAPIFilter);
+    const filter = JSON.parse(JSON.stringify($jobAPIFilter));
     let query = '?';
     if (filter.salaryMin) {
       query += `salaryMin=${filter.salaryMin}&`;

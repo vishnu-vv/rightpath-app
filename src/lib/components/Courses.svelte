@@ -22,10 +22,10 @@
   <CourseFilter />
 {:else}
   <div class="courses">
-    <p class="font-nuetral-300 mt-2">
-      <span class="font-nuetral-500">{$courses.length}</span> courses found
+    <p class="font-nuetral-300 my-2">
+      <span class="font-nuetral-500 font-extrabold">{$courses.length}</span> courses found
     </p>
-    <SearchBar value={searchCourse}  showJobFilter={showFilter} />
+    <SearchBar value={searchCourse}  showJobFilter={showFilter} placeholder={"Search by course"} />
     {#each $filteredCourses as course}
       <div class="max-w-sm bg-white rounded-lg shadow-md mt-4 pt-4">
         <img class="rounded-t-lg w-11/12 mx-auto" src={courseImage} alt={course.title} />

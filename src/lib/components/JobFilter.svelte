@@ -1,90 +1,72 @@
 <script lang="ts">
-  import { CourseAPIFilter, courseAPIFilter, courseAPIFilterObject, showFilter } from '$lib/shared/stores/course';
-  import { selectedPassions } from '$lib/shared/stores/passion';
+  import { JobAPIFilter, jobAPIFilter, showJobFilter, skills } from '$lib/shared/stores/job';
+  import { onMount } from 'svelte';
 
-  const locations = ['Kerala', 'Uttar Pradesh', 'Telangana'];
-  const durations = ['Less than a year', '1 year', '2 years', '3 years', '4 years', 'More than 4 years'];
-  const universities = [{
-    "id": 4,
-    "name": "Federal Institute of Science and Technology"
-  }, {
-    "id": 5,
-    "name": "Jawaharlal Nehru Architecture and Fine Arts University"
-  }, {
-    "id": 6,
-    "name": "Dayalbagh Educational Institute, Bulandshahar"
-  }];
-
-  function updateCourseAPIFilter(e: any) {
-    const filter = $courseAPIFilterObject;
-    let { checked, value, name } = e.target;
-    let selected = filter[name];
-    selected = selected.filter((item: any) => item != value);
-    if (checked) selected.push(value);
-    filter[name] = selected;
-    courseAPIFilter.set(JSON.stringify(filter));
+  function updateJobAPIFilter(e: any) {
+    const filter = $jobAPIFilter;
+    let { checked, value } = e.target;
+    filter.skills = filter.skills.filter((item: any) => item != value);
+    if (checked) filter.skills.push(value);
+    jobAPIFilter.set(filter);
   }
 
-  function resetCourseAPIFilter() {
-    courseAPIFilter.set(JSON.stringify(new CourseAPIFilter()));
+  async function fetchSkills() {
+    const res = await fetch(`https://rightpath-api.herokuapp.com/skills`);
+    const skillList = await res.json();
+    skills.set(skillList)
+  }
+
+  onMount(async () => fetchSkills());
+
+  function resetJobAPIFilter() {
+    jobAPIFilter.set(new JobAPIFilter());
   }
 </script>
 
 <div class="course-filter p-4">
   <h2 class="font-bold text-lg mb-8">Filter</h2>
-  <h3 class="uppercase text-xs font-nuetral-400 mt-4 mb-1">Passion</h3>
-  {#each $selectedPassions as passion}
-  <div class="flex items-start m2-6">
-    <div class="flex items-center h-5">
-      <input id={passion.title} name="passionIds" on:click={updateCourseAPIFilter} type="checkbox" value={passion.id}
-        class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-        required>
-    </div>
-    <label for={passion.title} class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{passion.title}</label>
-  </div>
-  {/each}
+  <label for="default-range" class="uppercase text-xs font-nuetral-400 mt-4 mb-1 flex justify-between tracking-widest">
+    <span>
+      Minimum Salary
+    </span>
+    <span>
+      &#8377; {$jobAPIFilter.salaryMin} LPA
+    </span>
+  </label>
+  <input id="default-range" type="range" min="10000" max="1000000" step="10000" bind:value={$jobAPIFilter.salaryMin}
+    class="w-full h-2 bg-nuetral-100 accent-primary-500 rounded-lg appearance-none cursor-pointer">
 
-  <h3 class="uppercase text-xs font-nuetral-400 mt-4 mb-1">Location</h3>
-  {#each locations as location}
-  <div class="flex items-start m2-6">
-    <div class="flex items-center h-5">
-      <input id={location} name="locations" on:click={updateCourseAPIFilter} type="checkbox" value={location}
-        class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-        required>
-    </div>
-    <label for={location} class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{location}</label>
-  </div>
-  {/each}
+  <label for="default-range" class="uppercase text-xs font-nuetral-400 mt-4 mb-1 flex justify-between tracking-widest">
+    <span>
+      Maximum Salary
+    </span>
+    <span>
+      &#8377; {$jobAPIFilter.salaryMax} LPA
+    </span>
+  </label>
+  <input id="default-range" type="range" min="1000000" max="10000000" step="10000" bind:value={$jobAPIFilter.salaryMax}
+    class="w-full h-2 bg-nuetral-100 accent-primary-500 rounded-lg appearance-none cursor-pointer">
 
-  <h3 class="uppercase text-xs font-nuetral-400 mt-4 mb-1">Duration</h3>
-  {#each durations as duration, i}
-  <div class="flex items-start m2-6">
-    <div class="flex items-center h-5">
-      <input id={duration} name="durations" on:click={updateCourseAPIFilter} type="checkbox" value={i}
-        class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+  <h3 class="uppercase text-xs font-nuetral-400 mt-4 mb-1 tracking-widest">Skill</h3>
+  {#each $skills as skill}
+  <div class="flex items-center m2-6">
+    <div class="flex items-center h-8 my-auto">
+      <input id={skill.title} name="skills" on:click={updateJobAPIFilter} 
+        type="checkbox" value={skill.id} checked={$jobAPIFilter.skills.includes(skill.id.toString(10))}
+        class="w-6 h-6 rounded border border-nuetral-300 accent-primary-500 text-primary-500"
         required>
     </div>
-    <label for={duration} class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{duration}</label>
-  </div>
-  {/each}
-
-  <h3 class="uppercase text-xs font-nuetral-400 mt-4 mb-1">University</h3>
-  {#each universities as uni}
-  <div class="flex items-start m2-6">
-    <div class="flex items-center h-5">
-      <input id={uni.name} name="universityIds" on:click={updateCourseAPIFilter} type="checkbox" value={uni.id}
-        class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-        required>
-    </div>
-    <label for={uni.name} class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{uni.name}</label>
+    <label for={skill.title} class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{skill.title}</label>
   </div>
   {/each}
 
   <div class="flex my-8 justify-between">
-    <button on:click={resetCourseAPIFilter} class="btn btn-secondary w-1/2 mr-1 h-10 text-sm mx-auto font-semibold mt-8 grid place-content-center">
+    <button on:click={resetJobAPIFilter}
+      class="btn btn-secondary w-1/2 mr-1 h-10 text-sm mx-auto font-semibold mt-8 grid place-content-center">
       Clear
     </button>
-    <button on:click={() => showFilter.set(false)} class="btn btn-primary w-1/2 ml-1 h-10 text-sm mx-auto font-semibold mt-8 grid place-content-center">
+    <button on:click={()=> showJobFilter.set(false)} class="btn btn-primary w-1/2 ml-1 h-10 text-sm mx-auto
+      font-semibold mt-8 grid place-content-center">
       Apply
     </button>
   </div>

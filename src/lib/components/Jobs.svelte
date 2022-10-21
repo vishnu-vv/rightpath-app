@@ -1,10 +1,12 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import jobImage from "$lib/images/job.png"
+  import searchIcon from "$lib/images/search-icon.png"
   import SkeletonCardLoader from "$lib/components/SkeletonCardLoader.svelte";
 	import { jobs, selectedJob, filteredJobs, query, searchJob, showJobFilter } from '$lib/shared/stores/job';
 	import JobFilter from './JobFilter.svelte';
 	import { isJobOverlayOpen } from '$lib/shared/stores/overlay';
+	import SearchBar from './SearchBar.svelte';
 
   async function fetchJobs(query: string) {
     const res = await fetch(`https://rightpath-api.herokuapp.com/jobs${query}`);
@@ -21,13 +23,10 @@
   <JobFilter />
 {:else}
   <div class="jobs">
-    <p class="font-nuetral-300 mt-2">
-      <span class="font-nuetral-500">{$jobs.length}</span> jobs found
+    <p class="font-nuetral-300 my-2">
+      <span class="font-nuetral-500 font-extrabold">{$jobs.length}</span> jobs found
     </p>
-    <div class="flex">
-      <input bind:value={$searchJob} class="bg-white border border-nuetral-200 rounded-sm px-2 w-3/4" placeholder="Search course title" type="text">
-      <button on:click={() => showJobFilter.set(true)} class="w-1/4">Filter</button>
-    </div>
+    <SearchBar value={searchJob} showJobFilter={showJobFilter} placeholder={"Search by job"} />
     {#each $filteredJobs as job}
       <div class="max-w-sm bg-white rounded-lg shadow-md mt-4 pt-4">
         <img class="rounded-t-lg w-11/12 mx-auto" src={jobImage} alt={job.title} />
