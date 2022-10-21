@@ -40,7 +40,6 @@
           <div class="mb-2 font-normal flex text-nuetral-400">
             {#each job.skills as skill}
               {skill.title}&#8218;&#8201;
-
             {/each}
           </div>
           <a class="p-0" href="/journey/job">
