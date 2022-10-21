@@ -32,10 +32,10 @@
       <div class="max-w-sm bg-white rounded-lg shadow-md mt-4 pt-4">
         <img class="rounded-t-lg w-11/12 mx-auto" src={courseImage} alt={course.title} />
         <div class="p-5 pt-2">
-          <p class="text-nuetral-400 text-sm my-4">
+          <p class="text-nuetral-400 text-sm my-4 text-left">
             {course.university.name}
           </p>
-          <h3 class="font-extrabold text-2xl my-4">{course.title}</h3>
+          <h3 class="font-extrabold text-2xl my-4 text-left">{course.title}</h3>
           <div class="my-6 font-normal flex justify-between text-nuetral-400">
             <span class="flex">
               <img class="mr-1" src={locationIcon} alt="Location Icon" width="25" height="25">
