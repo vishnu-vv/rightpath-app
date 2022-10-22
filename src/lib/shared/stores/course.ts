@@ -35,7 +35,6 @@ export const query = derived(
   courseAPIFilter,
   ($courseAPIFilter) => {
     let filter = $courseAPIFilter;
-    console.log(filter);
     
     let query = '?';
     if (filter.passionIds.length) {
