@@ -27,7 +27,7 @@
     <p class="font-nuetral-300 my-2">
       <span class="font-nuetral-500 font-extrabold">{$courses.length}</span> courses found
     </p>
-    <SearchBar value={searchCourse}  showJobFilter={showFilter} placeholder={"Search by course"} />
+    <SearchBar value={searchCourse}  showJobFilter={showFilter} placeholder={"Search by course"} filtersActive={!!$query} />
     <div class="grid place-content-center">
       {#each $filteredCourses as course}
         <div class="max-w-xs bg-white rounded-lg shadow-md mt-4 p-4">

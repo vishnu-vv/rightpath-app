@@ -37,7 +37,7 @@
   <div class="flex items-center my-0.5">
     <div class="items-center h-8 my-auto flex">
       <input id={passion.title} name="passionIds" on:click={updateCourseAPIFilter} type="checkbox" value={passion.id}
-        checked={$courseAPIFilter.passionIds.includes(passion.id.toString(10))}
+        checked={$courseAPIFilter.passionIds.includes(passion.id.toString())}
         class="w-6 h-6 rounded border border-nuetral-300 accent-primary-500 text-primary-500" required>
     </div>
     <label for={passion.title}

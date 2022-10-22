@@ -25,7 +25,7 @@
     <p class="font-nuetral-300 my-2">
       <span class="font-nuetral-500 font-extrabold">{$jobs.length}</span> jobs found
     </p>
-    <SearchBar value={searchJob} showJobFilter={showJobFilter} placeholder={"Search by job"} />
+    <SearchBar value={searchJob} showJobFilter={showJobFilter} placeholder={"Search by job"} filtersActive={!!$query} />
     {#each $filteredJobs as job}
       <div class="max-w-sm bg-white rounded-lg shadow-md mt-4 p-4">
         <img class="rounded-lg max-w-11/12 w-80 h-56" src={job.imageUrl ?? jobImage} alt={job.title} height="225" width="350" />
