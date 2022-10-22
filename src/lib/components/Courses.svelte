@@ -30,9 +30,9 @@
     <SearchBar value={searchCourse}  showJobFilter={showFilter} placeholder={"Search by course"} />
     <div class="grid place-content-center">
       {#each $filteredCourses as course}
-        <div class="max-w-xs bg-white rounded-lg shadow-md mt-4 pt-4">
-          <img class="rounded-t-lg w-11/12 mx-auto h-56" src={course.imageUrl ?? courseImage} alt={course.title}  height="225" width="350" />
-          <div class="p-5 pt-2">
+        <div class="max-w-xs bg-white rounded-lg shadow-md mt-4 p-4">
+          <img class="rounded-lg max-w-11/12 w-80 h-56" src={course.imageUrl ?? courseImage} alt={course.title}  height="225" width="350" />
+          <div class="pt-2">
             <p class="text-nuetral-400 text-sm my-4 text-left">
               {course.university.name}
             </p>

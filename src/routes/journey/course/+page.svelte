@@ -20,12 +20,12 @@
   <Profile />
   <img class="my-4 mx-auto" src={personImage} width="50" height="50" alt="Person">
   <h2 class="font-extrabold">2022</h2>
-  <div class="max-w-xs bg-white rounded-lg shadow-md mt-4 pt-4">
-    <img class="rounded-t-lg w-11/12 mx-auto h-56" 
+  <div class="max-w-xs bg-white rounded-lg shadow-md mt-4 p-4">
+    <img class="rounded-lg max-w-11/12 w-80 h-56" 
       src={$selectedCourse?.imageUrl ? $selectedCourse.imageUrl : courseImage}
       height="225" width="350" alt="Select Course" />
     {#if $selectedCourse}
-      <div class="p-5 pt-2">
+      <div class="pt-2">
         <p class="text-nuetral-400 text-sm my-4 text-left">
           {$selectedCourse.university.name}
         </p>
