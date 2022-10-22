@@ -8,14 +8,24 @@
 	import CourseFilter from './CourseFilter.svelte';
 	import { isCourseOverlayOpen } from '$lib/shared/stores/overlay';
 	import SearchBar from './SearchBar.svelte';
+	import { API, durations } from '$lib/shared/contants';
 
   async function fetchCourses(query: string) {
-    const res = await fetch(`https://rightpath-api.herokuapp.com/courses${query}`);
+    const res = await fetch(`${API}/courses${query}`);
     const courseList = await res.json();
     courses.set(courseList)
   }
 
-  onMount(async () => fetchCourses($query));
+  async function fetchUniversities() {
+    const res = await fetch(`${API}/universities`);
+    const universities = await res.json();
+    courses.set(universities)
+  }
+
+  onMount(async () => {
+    fetchCourses($query);
+    fetchUniversities();
+  });
 
   $: fetchCourses($query)
 </script>
@@ -34,17 +44,17 @@
           <img class="rounded-lg max-w-11/12 w-80 h-56" src={course.imageUrl ?? courseImage} alt={course.title}  height="225" width="350" />
           <div class="pt-2">
             <p class="text-nuetral-400 text-sm my-4 text-left">
-              {course.university.name}
+              {course.university?.name}
             </p>
             <h3 class="font-extrabold text-2xl my-4 text-left">{course.title}</h3>
             <div class="my-6 font-normal flex justify-between text-nuetral-400">
               <span class="flex">
                 <img class="mr-1" src={locationIcon} alt="Location Icon" width="25" height="25">
-                {course.university.location}
+                {course.university?.location}
               </span>
               <span class="flex">
                 <img class="mr-1" src={durationIcon} alt="Duration Icon" width="25" height="25">
-                {course.duration ?? "4 Years"}
+                {durations[course.duration || 4]}
               </span>
             </div>
             <a class="p-0" href="/journey/job">

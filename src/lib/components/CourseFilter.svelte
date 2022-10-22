@@ -1,9 +1,8 @@
 <script lang="ts">
+	import { durations, locations } from '$lib/shared/contants';
   import { CourseAPIFilter, courseAPIFilter, showFilter } from '$lib/shared/stores/course';
   import { selectedPassions } from '$lib/shared/stores/passion';
 
-  const locations = ['Kerala', 'Uttar Pradesh', 'Telangana'];
-  const durations = ['Less than a year', '1 year', '2 years', '3 years', '4 years', 'More than 4 years'];
   const universities = [{
     "id": 4,
     "name": "Federal Institute of Science and Technology"

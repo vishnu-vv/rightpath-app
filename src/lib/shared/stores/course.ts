@@ -1,6 +1,6 @@
 import { derived } from 'svelte/store';
 import { localStorageStore } from "@babichjacob/svelte-localstorage/svelte-kit";
-import type { Course } from '$lib/models';
+import type { Course } from '$lib/shared/models';
 
 export const showFilter = localStorageStore("showFilter", false);
 export const searchCourse = localStorageStore("searchCourse", '');

@@ -5,6 +5,7 @@
 	import { courseAPIFilter } from '$lib/shared/stores/course';
   import personImage from "$lib/images/person1.png";
 	import Calendar from "$lib/components/Calendar.svelte";
+	import { API } from '$lib/shared/contants';
   let minQueryValue = 1;
   let resetOnBlur = false;
   let fetchResetOnBlur = false;
@@ -35,7 +36,7 @@
     max={2}
     on:change={() => {updateCourseFilter($selectedPassionIds)}}
     placeholder="Select your passions"
-    fetch="https://rightpath-api.herokuapp.com/passions"
+    fetch={`${API}/passions`}
   ></Svelecte>
 
   <a href="/journey/course">

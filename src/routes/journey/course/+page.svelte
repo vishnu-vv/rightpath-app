@@ -8,6 +8,7 @@
 	import { isCourseOverlayOpen } from "$lib/shared/stores/overlay";
 	import Courses from "$lib/components/Courses.svelte";
 	import Profile from "$lib/components/Profile.svelte";
+	import { durations } from "$lib/shared/contants";
 </script>
 
 {#if $isCourseOverlayOpen}
@@ -27,17 +28,17 @@
     {#if $selectedCourse}
       <div class="pt-2">
         <p class="text-nuetral-400 text-sm my-4 text-left">
-          {$selectedCourse.university.name}
+          {$selectedCourse.university?.name}
         </p>
         <h3 class="font-extrabold text-2xl my-4 text-left">{$selectedCourse.title}</h3>
         <div class="my-6 font-normal flex justify-between text-nuetral-400">
           <span class="flex">
             <img class="mr-1" src={locationIcon} alt="Location Icon" width="25" height="25">
-            {$selectedCourse.university.location}
+            {$selectedCourse.university?.location}
           </span>
           <span class="flex">
             <img class="mr-1" src={durationIcon} alt="Duration Icon" width="25" height="25">
-            {$selectedCourse.duration ?? "4 Years"}
+            {durations[$selectedCourse.duration || 4]}
           </span>
         </div>
 

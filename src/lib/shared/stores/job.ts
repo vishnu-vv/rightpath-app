@@ -1,4 +1,4 @@
-import type { Job, Skill } from "$lib/models";
+import type { Job, Skill } from "$lib/shared/models";
 import { localStorageStore } from "@babichjacob/svelte-localstorage/svelte-kit";
 import { derived } from "svelte/store";
 

@@ -6,9 +6,10 @@
 	import JobFilter from './JobFilter.svelte';
 	import { isJobOverlayOpen } from '$lib/shared/stores/overlay';
 	import SearchBar from './SearchBar.svelte';
+	import { API } from '$lib/shared/contants';
 
   async function fetchJobs(query: string) {
-    const res = await fetch(`https://rightpath-api.herokuapp.com/jobs${query}`);
+    const res = await fetch(`${API}/jobs${query}`);
     const jobList = await res.json();
     jobs.set(jobList)
   }
