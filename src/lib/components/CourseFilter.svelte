@@ -1,18 +1,7 @@
 <script lang="ts">
 	import { durations, locations } from '$lib/shared/contants';
-  import { CourseAPIFilter, courseAPIFilter, showFilter } from '$lib/shared/stores/course';
+  import { CourseAPIFilter, courseAPIFilter, showFilter, universities } from '$lib/shared/stores/course';
   import { selectedPassions } from '$lib/shared/stores/passion';
-
-  const universities = [{
-    "id": 4,
-    "name": "Federal Institute of Science and Technology"
-  }, {
-    "id": 5,
-    "name": "Jawaharlal Nehru Architecture and Fine Arts University"
-  }, {
-    "id": 6,
-    "name": "Dayalbagh Educational Institute, Bulandshahar"
-  }];
 
   function updateCourseAPIFilter(e: any) {
     const filter = $courseAPIFilter;
@@ -69,11 +58,11 @@
   {/each}
 
   <h3 class="uppercase text-xs font-nuetral-400 mt-4 mb-1">University</h3>
-  {#each universities as uni}
+  {#each $universities as uni}
   <div class="flex items-center my-0.5">
     <div class="items-center h-8 my-auto flex">
       <input id={uni.name} name="universityIds" on:click={updateCourseAPIFilter} type="checkbox" value={uni.id}
-        checked={$courseAPIFilter.universityIds.includes((uni.id).toString())}
+        checked={$courseAPIFilter.universityIds.includes(uni.id)}
         class="w-6 h-6 rounded border border-nuetral-300 accent-primary-500 text-primary-500" required>
     </div>
     <label for={uni.name} class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{uni.name}</label>

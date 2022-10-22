@@ -4,7 +4,7 @@
   import durationIcon from "$lib/images/duration-icon.png"
   import locationIcon from "$lib/images/location-icon.png"
   import SkeletonCardLoader from "$lib/components/SkeletonCardLoader.svelte";
-	import { courses, selectedCourse, filteredCourses, query, searchCourse, showFilter } from '$lib/shared/stores/course';
+	import { courses, selectedCourse, filteredCourses, query, searchCourse, showFilter, universities } from '$lib/shared/stores/course';
 	import CourseFilter from './CourseFilter.svelte';
 	import { isCourseOverlayOpen } from '$lib/shared/stores/overlay';
 	import SearchBar from './SearchBar.svelte';
@@ -18,8 +18,8 @@
 
   async function fetchUniversities() {
     const res = await fetch(`${API}/universities`);
-    const universities = await res.json();
-    courses.set(universities)
+    const universityList = await res.json();
+    universities.set(universityList)
   }
 
   onMount(async () => {

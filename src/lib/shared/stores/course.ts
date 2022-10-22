@@ -1,10 +1,11 @@
 import { derived } from 'svelte/store';
 import { localStorageStore } from "@babichjacob/svelte-localstorage/svelte-kit";
-import type { Course } from '$lib/shared/models';
+import type { Course, University } from '$lib/shared/models';
 
 export const showFilter = localStorageStore("showFilter", false);
 export const searchCourse = localStorageStore("searchCourse", '');
 
+export const universities = localStorageStore<University[]>("universities", []);
 export const courses = localStorageStore<Course[]>("courses", []);
 export const filteredCourses: any = derived(
   [searchCourse, courses],
