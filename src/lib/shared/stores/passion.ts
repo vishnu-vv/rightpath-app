@@ -2,7 +2,7 @@ import { localStorageStore } from "@babichjacob/svelte-localstorage/svelte-kit";
 import { derived } from 'svelte/store';
 
 export interface Passion {
-  id: number;
+  id: string;
   title: string;
 }
 
@@ -13,3 +13,6 @@ export const selectedPassionNames = derived(selectedPassions, ($selectedPassions
   return $selectedPassions.map(passion => passion.title);
 });
 
+export const selectedPassionIds = derived(selectedPassions, ($selectedPassions) => {
+  return $selectedPassions.map(passion => passion.id.toString());
+});

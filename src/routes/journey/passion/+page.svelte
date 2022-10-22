@@ -1,12 +1,17 @@
 <script lang="ts">
   import Svelecte from 'svelecte';
-  import { selectedPassionNames, selectedPassions } from "$lib/shared/stores/passion";
+  import { selectedPassionIds, selectedPassionNames, selectedPassions } from "$lib/shared/stores/passion";
   import { currentUser } from "$lib/shared/stores/user";
+	import { courseAPIFilter } from '$lib/shared/stores/course';
   import personImage from "$lib/images/person1.png";
 	import Calendar from "$lib/components/Calendar.svelte";
   let minQueryValue = 1;
   let resetOnBlur = false;
   let fetchResetOnBlur = false;
+
+  function updateCourseFilter(passionIds: string[]) {
+    courseAPIFilter.set({...$courseAPIFilter, passionIds});
+  }
 </script>
 
 <main class="grid place-content-center mt-20">
@@ -28,7 +33,7 @@
     fetchMode="init"
     multiple
     max={2}
-    on:invalidValue={() => {}}
+    on:change={() => {updateCourseFilter($selectedPassionIds)}}
     placeholder="Select your passions"
     fetch="https://rightpath-api.herokuapp.com/passions"
   ></Svelecte>

@@ -37,6 +37,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"svelecte": "^3.11.1"
+		"svelecte": "^3.12.0"
 	}
 }
