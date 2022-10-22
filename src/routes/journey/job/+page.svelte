@@ -19,7 +19,9 @@
   <img class="my-4 mx-auto" src={personImage} width="50" height="50" alt="Person">
   <h2 class="font-extrabold">2026</h2>
   <div class="max-w-xs bg-white rounded-lg shadow-md mt-4 pt-4">
-    <img class="rounded-t-lg w-11/12 mx-auto" src={jobImage} alt="Select Course" />
+    <img class="rounded-t-lg w-11/12 mx-auto h-56" 
+      src={$selectedJob?.imageUrl ? $selectedJob.imageUrl : jobImage}
+      height="225" width="350" alt="Select Job" />
     {#if $selectedJob}
       <div class="p-5 pt-2 text-left">
         <h3 class="font-extrabold text-2xl my-2">{$selectedJob.title}</h3>

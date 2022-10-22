@@ -8,6 +8,7 @@ export interface University {
 export interface Course {
   title: string;
   overview: string;
+  imageUrl?: string;
   duration?: number;
   university: University
 }
