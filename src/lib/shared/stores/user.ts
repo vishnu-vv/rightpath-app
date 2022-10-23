@@ -16,13 +16,15 @@ function getAge(dateString: string) {
 let name: string = '';
 export const currentUser = localStorageStore("user", name);
 
-let dob: any = new Date();
-export const dateOfBirth = localStorageStore("dateOfBirth", dob);
+// let dob: any = new Date();
+export const dateOfBirth = localStorageStore("dateOfBirth", undefined);
 
 export const currentDateOfBirth = derived(dateOfBirth, ($dateOfBirth) => {
-  return new Date($dateOfBirth);
+  if($dateOfBirth) return new Date($dateOfBirth);
+  else return undefined;
 });
 
 export const age = derived(dateOfBirth, ($dateOfBirth) => {
-  return getAge(dayjs(new Date($dateOfBirth)).format('YYYY/MM/DD'))
+  if($dateOfBirth) return getAge(dayjs(new Date($dateOfBirth)).format('YYYY/MM/DD'));
+  else return undefined;
 });

@@ -6,8 +6,8 @@
   @apply rounded-sm py-1 px-2 cursor-pointer tracking-wider text-white;
 }
 
-.btn.disabled {
-  @apply opacity-40;
+.disabled {
+  @apply opacity-40 pointer-events-none;
 }
 
 .btn-primary {

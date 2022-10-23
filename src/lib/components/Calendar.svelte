@@ -4,6 +4,8 @@
 	import { currentDateOfBirth, dateOfBirth } from '$lib/shared/stores/user';
 
   let store: any;
+
+  let yesterday = dayjs().subtract(1, 'day').toDate();
   
   let theme = {
     "calendar": {
@@ -39,8 +41,10 @@
   $: $store?.hasChosen && dateOfBirth.set($store?.selected)
 </script>
 
-<Datepicker {theme} bind:store format="DD/MM/YYYY" selected={$currentDateOfBirth} let:key let:send let:receive>
-  <input in:receive|local={{ key }} out:send|local={{ key }} value={dayjs($store?.selected).format('DD/MM/YYYY')}
+<Datepicker {theme} end={yesterday} bind:store format="DD/MM/YYYY" selected={$currentDateOfBirth} let:key let:send let:receive>
+  <input in:receive|local={{ key }} out:send|local={{ key }}
     class="bg-transparent text-center font-extrabold text-secondary-500 text-3xl border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none"
-    type="text" placeholder="{$store?.hasChosen ? dayjs($store.selected).format('DD/MM/YYYY') : 'Date of Birth'}">
+    type="text" placeholder="{$store?.hasChosen ? dayjs($store.selected).format('DD/MM/YYYY') : 'Date of Birth'}"
+    class:placeholder-secondary-500={$currentDateOfBirth}
+    >
 </Datepicker>

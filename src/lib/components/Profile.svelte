@@ -10,7 +10,7 @@
   function resetAll() {
     selectedCourse.set(null);
     selectedPassions.set([]);
-    dateOfBirth.set(null);
+    dateOfBirth.set(undefined);
     currentUser.set('');
     showFilter.set(false);
     showJobFilter.set(false);
