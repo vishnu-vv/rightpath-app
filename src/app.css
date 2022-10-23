@@ -19,7 +19,7 @@
 }
 
 .btn-secondary {
-  @apply border border-primary-500 text-primary-500 bg-white;
+  @apply border border-primary-500 text-primary-500;
 }
 
 .btn-secondary:hover {
