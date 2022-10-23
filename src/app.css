@@ -26,6 +26,14 @@
   @apply border-primary-600 text-primary-600
 }
 
+.btn-ghost {
+  @apply text-primary-500;
+}
+
+.btn-ghost:hover {
+  @apply text-primary-600;
+}
+
 a {
   outline: none;
   padding: 2px 1px 0;
