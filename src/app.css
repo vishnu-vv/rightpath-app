@@ -67,11 +67,21 @@ body {
   font-family: 'Red Hat Display';
 }
 
+body.journey {
+  background-image: url('/images/background.png');
+}
+
 @media screen and (min-width: 1024px) {
   body {
     background-image: url('/images/banner-image-lg.png');
   }
+  
+  body.journey {
+    background-image: url('/images/background-lg.png');
+  }
 }
+
+
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'CabinetGrotesk-Variable';
