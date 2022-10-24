@@ -18,8 +18,8 @@
   <Profile />
   <img class="my-4 mx-auto" src={personImage} width="50" height="50" alt="Person">
   <h2 class="font-extrabold">2026</h2>
-  <div class="bg-white rounded-lg shadow-md mt-4 p-4 grid place-content-center">
-    <img class="rounded-lg max-w-11/12 w-80 h-56"
+  <div class="bg-white rounded-lg shadow-md mt-4 p-4 grid place-content-center w-full sm:w-80">
+    <img class="rounded-lg w-auto h-56"
       src={$selectedJob?.imageUrl ? $selectedJob.imageUrl : jobImage}
       height="225" width="350" alt="Select Job" />
     {#if $selectedJob}
