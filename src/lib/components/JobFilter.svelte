@@ -1,6 +1,5 @@
 <script lang="ts">
   import { JobAPIFilter, jobAPIFilter, showJobFilter, skills } from '$lib/shared/stores/job';
-  import { onMount } from 'svelte';
 
   function updateJobAPIFilter(e: any) {
     const filter = $jobAPIFilter;
@@ -9,14 +8,6 @@
     if (checked) filter.skills.push(value);
     jobAPIFilter.set(filter);
   }
-
-  async function fetchSkills() {
-    const res = await fetch(`https://rightpath-api.herokuapp.com/skills`);
-    const skillList = await res.json();
-    skills.set(skillList)
-  }
-
-  onMount(async () => fetchSkills());
 
   function resetJobAPIFilter() {
     jobAPIFilter.set(new JobAPIFilter());
@@ -52,7 +43,7 @@
   <div class="flex items-center">
     <div class="flex items-center h-8 my-auto">
       <input id={skill.title} name="skills" on:click={updateJobAPIFilter} 
-        type="checkbox" value={skill.id} checked={$jobAPIFilter.skills.includes(skill.id)}
+        type="checkbox" value={skill.id} checked={$jobAPIFilter.skills.includes(skill.id.toString())}
         class="w-6 h-6 rounded border border-nuetral-300 accent-primary-500 text-primary-500"
         required>
     </div>

@@ -9,8 +9,8 @@
 	import { isCourseOverlayOpen } from '$lib/shared/stores/overlay';
 	import SearchBar from './SearchBar.svelte';
 	import { API, durations } from '$lib/shared/contants';
-	import type { Course } from '$lib/shared/models';
-	import { jobAPIFilter } from '$lib/shared/stores/job';
+	import type { Course, Job } from '$lib/shared/models';
+	import { jobAPIFilter, skills } from '$lib/shared/stores/job';
 
   async function fetchCourses(query: string) {
     const res = await fetch(`${API}/courses${query}`);
@@ -31,6 +31,15 @@
       jobAPIFilter.set({ ...$jobAPIFilter, courseId: '' })
     }
   }
+  
+  function updateSkillList(course: Course | null) {
+    if(course) {
+      const skillList = course.jobs.map((job: Job) => job.skills).flat();
+      skills.set(skillList)
+    } else {
+      skills.set([])
+    }
+  }
 
   onMount(async () => {
     fetchCourses($query);
@@ -39,6 +48,7 @@
 
   $: fetchCourses($query)
   $: updateJobFilter($selectedCourse)
+  $: updateSkillList($selectedCourse)
 </script>
 
 {#if $showFilter}

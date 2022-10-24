@@ -24,6 +24,7 @@ export interface Course {
   imageUrl?: string;
   duration?: number;
   university: University
+  jobs: Job[];
 }
 
 export interface Skill {
