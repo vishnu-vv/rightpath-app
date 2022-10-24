@@ -17,11 +17,11 @@
   </Overlay>
 {/if}
 
-<div class="grid place-content-center mt-20 text-center px-4">
+<div class="grid place-content-center mt-20 text-center px-4 items-center">
   <Profile />
   <img class="my-4 mx-auto" src={personImage} width="50" height="50" alt="Person">
   <h2 class="font-extrabold">2022</h2>
-  <div class="max-w-xs bg-white rounded-lg shadow-md mt-4 p-4">
+  <div class="bg-white rounded-lg shadow-md mt-4 p-4 grid place-content-center">
     <img class="rounded-lg max-w-11/12 w-80 h-56" 
       src={$selectedCourse?.imageUrl ? $selectedCourse.imageUrl : courseImage}
       height="225" width="350" alt="Select Course" />

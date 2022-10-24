@@ -16,8 +16,8 @@
 
 <div class="w-full">
   <div class="title flex justify-between items-center min-h-[75px] my-auto">
-    <span class="text-2xl font-semibold">{category.title}</span>
-    <img src={expandIcon} alt="Expand icon" height="25" width="25"
+    <span class="text-lg font-semibold">{category.title}</span>
+    <img class="cursor-pointer" src={expandIcon} alt="Expand icon" height="25" width="25"
       class:rotate-180={category.expanded}
       on:click={() => { category.expanded = !category.expanded }}
     >
@@ -28,7 +28,7 @@
       {#each category.passions as passion}
         <span 
           on:click={() => togglePassion(passion)}
-          class="border border-nuetral-100 rounded-md px-3 py-3 text-lg mr-2"
+          class="border border-nuetral-100 rounded-md px-2 py-2 text-sm mr-2 cursor-pointer"
           class:bg-secondary-500={$selectedPassionIdInts.includes(passion.id)}
           class:text-white={$selectedPassionIdInts.includes(passion.id)}
           class:font-semibold={$selectedPassionIdInts.includes(passion.id)}
