@@ -18,6 +18,7 @@ export const filteredJobs: any = derived(
 export const selectedJob = localStorageStore<Job | null>("selectedJob", null);
 
 export class JobAPIFilter {
+  courseId: string;
   salaryMin: number;
   salaryMax: number;
   skills: string[];
@@ -25,6 +26,7 @@ export class JobAPIFilter {
     this.salaryMin = 10000;
     this.salaryMax = 10000000;
     this.skills = [];
+    this.courseId = '';
   }
 }
 
@@ -35,6 +37,9 @@ export const query = derived(
   ($jobAPIFilter) => {
     const filter = JSON.parse(JSON.stringify($jobAPIFilter));
     let query = '?';
+    if (filter.courseId) {
+      query += `courseId=${filter.courseId}&`;
+    }
     if (filter.salaryMin) {
       query += `salaryMin=${filter.salaryMin}&`;
     }

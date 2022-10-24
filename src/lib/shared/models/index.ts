@@ -18,6 +18,7 @@ export interface PassionCategory {
 }
 
 export interface Course {
+  id: string;
   title: string;
   overview: string;
   imageUrl?: string;

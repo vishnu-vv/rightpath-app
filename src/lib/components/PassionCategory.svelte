@@ -5,8 +5,6 @@
   export let category: PassionCategory;
 
   function togglePassion(p: Passion) {
-    console.log(p);
-    
     if($selectedPassionIdInts.includes(p.id)) {
       const updatedPassions = $selectedPassions.filter((passion: Passion) => passion.id !== p.id);
       selectedPassions.set(updatedPassions);

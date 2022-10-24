@@ -9,6 +9,8 @@
 	import { isCourseOverlayOpen } from '$lib/shared/stores/overlay';
 	import SearchBar from './SearchBar.svelte';
 	import { API, durations } from '$lib/shared/contants';
+	import type { Course } from '$lib/shared/models';
+	import { jobAPIFilter } from '$lib/shared/stores/job';
 
   async function fetchCourses(query: string) {
     const res = await fetch(`${API}/courses${query}`);
@@ -21,6 +23,14 @@
     const universityList = await res.json();
     universities.set(universityList)
   }
+  
+  function updateJobFilter(course: Course | null) {
+    if(course) {
+      jobAPIFilter.set({ ...$jobAPIFilter, courseId: course.id })
+    } else {
+      jobAPIFilter.set({ ...$jobAPIFilter, courseId: '' })
+    }
+  }
 
   onMount(async () => {
     fetchCourses($query);
@@ -28,6 +38,7 @@
   });
 
   $: fetchCourses($query)
+  $: updateJobFilter($selectedCourse)
 </script>
 
 {#if $showFilter}

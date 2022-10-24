@@ -1,14 +1,9 @@
 <script lang="ts">
-  import { isPassionSelectOpen, selectedPassionIds, selectedPassionNames } from "$lib/shared/stores/passion";
+  import { isPassionSelectOpen, selectedPassionNames } from "$lib/shared/stores/passion";
   import { currentUser, dateOfBirth } from "$lib/shared/stores/user";
-	import { courseAPIFilter } from '$lib/shared/stores/course';
   import personImage from "$lib/images/person1.png";
 	import Calendar from "$lib/components/Calendar.svelte";
 	import PassionSelect from '$lib/components/PassionSelect.svelte';
-
-  function updateCourseFilter(passionIds: string[]) {
-    courseAPIFilter.set({...$courseAPIFilter, passionIds});
-  }
 </script>
 
 <main class="grid place-content-center items-center">
@@ -21,9 +16,7 @@
   <h2 class="font-extrabold text-3xl my-2 text-center">and my passions are</h2>
   <input  on:click={() => {isPassionSelectOpen.set(true)}} bind:value={$selectedPassionNames} 
     class="bg-transparent flex flex-wrap text-center text-secondary-500 font-extrabold text-3xl border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none"
-    type="text" placeholder="eg: Football, Cricket"
-    on:change={() => updateCourseFilter($selectedPassionIds)}
-    >
+    type="text" placeholder="eg: Football, Cricket">
 
   {#if $isPassionSelectOpen}
     <PassionSelect isPassionSelectOpen={isPassionSelectOpen} />
