@@ -6,6 +6,17 @@ export interface University {
   courses?: Course[];
 }
 
+export interface Passion {
+  id: string;
+  title: string;
+}
+export interface PassionCategory {
+  id: string;
+  title: string;
+  passions: Passion[];
+  expanded?: boolean;
+}
+
 export interface Course {
   title: string;
   overview: string;

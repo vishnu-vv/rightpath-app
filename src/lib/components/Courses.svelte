@@ -68,7 +68,7 @@
           </div>
         </div>
       {:else}
-        <SkeletonCardLoader count={3} />
+        <SkeletonCardLoader type="card" count={3} />
       {/each}
     </div>
   </div>

@@ -1,14 +1,10 @@
 <script lang="ts">
-  import Svelecte from 'svelecte';
-  import { selectedPassionIds, selectedPassionNames, selectedPassions } from "$lib/shared/stores/passion";
+  import { isPassionSelectOpen, selectedPassionIds, selectedPassionNames } from "$lib/shared/stores/passion";
   import { currentUser, dateOfBirth } from "$lib/shared/stores/user";
 	import { courseAPIFilter } from '$lib/shared/stores/course';
   import personImage from "$lib/images/person1.png";
 	import Calendar from "$lib/components/Calendar.svelte";
-	import { API } from '$lib/shared/contants';
-  let minQueryValue = 1;
-  let resetOnBlur = false;
-  let fetchResetOnBlur = false;
+	import PassionSelect from '$lib/components/PassionSelect.svelte';
 
   function updateCourseFilter(passionIds: string[]) {
     courseAPIFilter.set({...$courseAPIFilter, passionIds});
@@ -23,21 +19,15 @@
   <h2 class="font-extrabold text-3xl my-2 text-center">and I'm born on</h2>
   <Calendar />
   <h2 class="font-extrabold text-3xl my-2 text-center">and my passions are</h2>
-  <input value={$selectedPassionNames} class="bg-transparent text-center text-secondary-500 font-extrabold text-3xl border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none" type="text" placeholder="eg: Football, Cricket">
+  <input  on:click={() => {isPassionSelectOpen.set(true)}} bind:value={$selectedPassionNames} 
+    class="bg-transparent flex flex-wrap text-center text-secondary-500 font-extrabold text-3xl border-b-2 border-dashed border-b-secondary-300 focus:border-b-primary-500 focus:border-solid focus:outline-none"
+    type="text" placeholder="eg: Football, Cricket"
+    on:change={() => updateCourseFilter($selectedPassionIds)}
+    >
 
-  <Svelecte
-    {resetOnBlur}
-    {fetchResetOnBlur}
-    bind:value={$selectedPassions}
-    valueAsObject
-    minQuery={minQueryValue}
-    fetchMode="init"
-    multiple
-    max={2}
-    on:change={() => {updateCourseFilter($selectedPassionIds)}}
-    placeholder="Select your passions"
-    fetch={`${API}/passions`}
-  ></Svelecte>
+  {#if $isPassionSelectOpen}
+    <PassionSelect isPassionSelectOpen={isPassionSelectOpen} />
+  {/if}
 
   <a href="/journey/course" class:disabled={!$currentUser || $selectedPassionNames.length < 1 || !$dateOfBirth}>
     <button class="btn btn-primary w-48 h-10 text-sm mx-auto font-semibold mt-8 grid place-content-center"
